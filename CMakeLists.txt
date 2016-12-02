@@ -40,10 +40,14 @@ endif ()
 
 include_directories(. include)
 
-set(SOURCES
-  src/main.cpp
-)
+#set(SOURCES
+#  src/main.cpp
+#)
+
 file(GLOB_RECURSE HEADERS "include/*.hpp")
 
-add_executable(caf-poke ${SOURCES} ${HEADERS})
+add_executable(caf-poke src/caf-poke.cpp ${HEADERS})
 target_link_libraries(caf-poke  ${CMAKE_DL_LIBS} ${CAF_LIBRARY_CORE} ${CAF_LIBRARY_IO})
+
+add_executable(caf-multiplex src/caf-multiplex.cpp ${HEADERS})
+target_link_libraries(caf-multiplex  ${CMAKE_DL_LIBS} ${CAF_LIBRARY_CORE} ${CAF_LIBRARY_IO})
