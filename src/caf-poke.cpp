@@ -78,6 +78,11 @@ behavior server(stateful_actor<tracking>* self) {
                << time.count() << " microseconds."
                << "(or " << (float(time.count()) / 1000) << " ms)" << std::endl;
           self->quit();
+        },
+        after(seconds(5)) >> [=] {
+          std::cerr << "[TIMEOUT] Received " << self->state.received.size()
+                    << " message." << std::endl;
+          self->quit();
         }
       );
     },
