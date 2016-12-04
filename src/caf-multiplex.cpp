@@ -85,10 +85,11 @@ behavior client(event_based_actor* self, const actor& other,
         std::cerr << "DONE" << std::endl;
         self->quit();
       } else {
-        self->delayed_send(self, milliseconds(interval), next_atom::value, i);
+        //self->delayed_send(self, milliseconds(interval), next_atom::value, i);
+        self->send(self, next_atom::value, i);
       }
     },
-    after(chrono::milliseconds(5 * interval)) >> [=] {
+    after(chrono::milliseconds(50 * interval)) >> [=] {
       std::cerr << "RESTARTING" << std::endl;
       self->send(self, next_atom::value, size_t(0));
     }
